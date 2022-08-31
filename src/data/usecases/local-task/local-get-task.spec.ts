@@ -1,38 +1,5 @@
-import { TaskParams } from "@/domain/models/task-model";
-
-interface GetTaskStore {
-  fetchItem: (id: string) => TaskParams | null;
-
-  fetchAll: (id: string) => Array<TaskParams> | [];
-}
-
-class GetTaskStoreSpy implements GetTaskStore {
-  allTasks: Array<TaskParams> = [];
-  fetchAllCount = 0;
-  fetchItemCount = 0;
-
-  fetchItem(id: string) {
-    this.fetchItemCount++;
-    return null;
-  }
-
-  fetchAll() {
-    this.fetchAllCount++;
-    return this.allTasks;
-  }
-}
-
-class LocalGetTask {
-  constructor(private readonly getTaskStore: GetTaskStore) {}
-
-  async getAll(): Promise<void> {
-    return;
-  }
-
-  async get(id: string): Promise<void> {
-    this.getTaskStore.fetchItem(id);
-  }
-}
+import { GetTaskStoreSpy } from "@/data/tests/get-task-mock";
+import { LocalGetTask } from "@/data/usecases/local-task/local-get-task";
 
 describe("LocalGetTask", () => {
   it("should not call getAll if get is called", async () => {
