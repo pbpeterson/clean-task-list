@@ -1,9 +1,10 @@
 import { GetTaskStore } from "@/data/protocols/get-task-store";
+import { TaskParams } from "@/domain/models/task-model";
 
 export class LocalGetTask {
   constructor(private readonly getTaskStore: GetTaskStore) {}
 
-  async getAll(): Promise<unknown> {
+  async getAll(): Promise<Array<TaskParams>> {
     try {
       const tasks = this.getTaskStore.fetchAll();
       return tasks;
