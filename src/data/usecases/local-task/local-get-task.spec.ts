@@ -22,7 +22,7 @@ describe("LocalGetTask", () => {
 
   it("should not call get if getALl is called", async () => {
     const { getTaskStoreSpy, sut } = makeSut();
-    await sut.getAll();
+    await sut.getAll("any_key");
     expect(getTaskStoreSpy.fetchAllCount).toBe(1);
     expect(getTaskStoreSpy.fetchItemCount).toBe(0);
   });
@@ -30,7 +30,7 @@ describe("LocalGetTask", () => {
   it("should return an empty list if there are no tasks", async () => {
     const { getTaskStoreSpy, sut } = makeSut();
     getTaskStoreSpy.allTasks = [];
-    const tasks = await sut.getAll();
+    const tasks = await sut.getAll("any_key");
     expect(tasks).toEqual([]);
   });
 
@@ -41,7 +41,7 @@ describe("LocalGetTask", () => {
       getTaskStoreSpy.fetchAllCount++;
       throw new Error();
     });
-    const tasks = await sut.getAll();
+    const tasks = await sut.getAll("any_key");
     expect(tasks).toEqual([]);
     expect(getTaskStoreSpy.fetchAllCount).toBe(1);
   });
@@ -50,7 +50,7 @@ describe("LocalGetTask", () => {
     const { getTaskStoreSpy, sut } = makeSut();
     const mockedTasks = makeTasksList();
     getTaskStoreSpy.allTasks = mockedTasks;
-    const tasks = await sut.getAll();
+    const tasks = await sut.getAll("any_key");
     expect(tasks).toEqual(mockedTasks);
     expect(getTaskStoreSpy.fetchAllCount).toBe(1);
   });
