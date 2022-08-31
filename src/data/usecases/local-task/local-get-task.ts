@@ -13,7 +13,8 @@ export class LocalGetTask {
     }
   }
 
-  async get(key: string, id: number): Promise<void> {
-    this.getTaskStore.fetchItem(key, id);
+  async get(key: string, id: number): Promise<TaskParams> {
+    const task = this.getTaskStore.fetchItem(key, id);
+    return task;
   }
 }

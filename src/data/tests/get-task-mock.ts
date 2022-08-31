@@ -6,14 +6,15 @@ export class GetTaskStoreSpy implements GetTaskStore {
   fetchAllCount = 0;
   fetchItemCount = 0;
 
-  fetchItem(id: string) {
+  fetchItem(key: string, id: number): TaskParams {
     this.fetchItemCount++;
-    return null;
+    const items = this.fetchAll(key);
+    const currentItem = items.filter((task) => task.id == id)[0];
+    return currentItem;
   }
 
-  fetchAll() {
+  fetchAll(key: string) {
     this.fetchAllCount++;
     return this.allTasks;
-    return [];
   }
 }

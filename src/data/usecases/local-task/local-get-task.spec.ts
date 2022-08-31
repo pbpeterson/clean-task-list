@@ -13,14 +13,7 @@ const makeSut = () => {
 };
 
 describe("LocalGetTask", () => {
-  it("should not call getAll if get is called", async () => {
-    const { getTaskStoreSpy, sut } = makeSut();
-    await sut.get("any_id", 0);
-    expect(getTaskStoreSpy.fetchItemCount).toBe(1);
-    expect(getTaskStoreSpy.fetchAllCount).toBe(0);
-  });
-
-  it("should not call get if getALl is called", async () => {
+  it("should not call get if getAll is called", async () => {
     const { getTaskStoreSpy, sut } = makeSut();
     await sut.getAll("any_key");
     expect(getTaskStoreSpy.fetchAllCount).toBe(1);
@@ -53,5 +46,16 @@ describe("LocalGetTask", () => {
     const tasks = await sut.getAll("any_key");
     expect(tasks).toEqual(mockedTasks);
     expect(getTaskStoreSpy.fetchAllCount).toBe(1);
+  });
+
+  it("should return a task by id", async () => {
+    const { getTaskStoreSpy, sut } = makeSut();
+    const mockedTasks = makeTasksList();
+    getTaskStoreSpy.allTasks = mockedTasks;
+    const currentTask = mockedTasks[0];
+    const currentTaskId = currentTask.id;
+    const task = await sut.get("any_key", currentTaskId);
+    expect(task).toEqual(currentTask);
+    expect(getTaskStoreSpy.fetchItemCount).toBe(1);
   });
 });
