@@ -4,8 +4,12 @@ export class LocalGetTask {
   constructor(private readonly getTaskStore: GetTaskStore) {}
 
   async getAll(): Promise<unknown> {
-    const tasks = this.getTaskStore.fetchAll();
-    return tasks;
+    try {
+      const tasks = this.getTaskStore.fetchAll();
+      return tasks;
+    } catch (error) {
+      return [];
+    }
   }
 
   async get(id: string): Promise<void> {

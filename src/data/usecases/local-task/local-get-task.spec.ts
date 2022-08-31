@@ -33,4 +33,16 @@ describe("LocalGetTask", () => {
     const tasks = await sut.getAll();
     expect(tasks).toEqual([]);
   });
+
+  it("should return an empty list if there is an error", async () => {
+    const { getTaskStoreSpy, sut } = makeSut();
+    getTaskStoreSpy.allTasks = makeTasksList();
+    jest.spyOn(getTaskStoreSpy, "fetchAll").mockImplementationOnce(() => {
+      getTaskStoreSpy.fetchAllCount++;
+      throw new Error();
+    });
+    const tasks = await sut.getAll();
+    expect(tasks).toEqual([]);
+    expect(getTaskStoreSpy.fetchAllCount).toBe(1);
+  });
 });
