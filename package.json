@@ -5,7 +5,9 @@
   "author": "Peterson Pereira Bozza <petersonbozza7@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@types/faker": "^6.6.9",
     "@types/node": "^18.7.14",
+    "faker": "5.1.0",
     "typescript": "^4.8.2"
   },
   "dependencies": {
