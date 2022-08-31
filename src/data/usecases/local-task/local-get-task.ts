@@ -4,6 +4,7 @@ export class LocalGetTask {
   constructor(private readonly getTaskStore: GetTaskStore) {}
 
   async getAll(): Promise<void> {
+    this.getTaskStore.fetchAll();
     return;
   }
 

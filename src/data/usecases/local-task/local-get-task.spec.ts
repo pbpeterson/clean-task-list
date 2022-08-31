@@ -18,4 +18,10 @@ describe("LocalGetTask", () => {
     expect(getTaskStoreSpy.fetchItemCount).toBe(1);
     expect(getTaskStoreSpy.fetchAllCount).toBe(0);
   });
+  it("should not call get if getALl is called", async () => {
+    const { getTaskStoreSpy, sut } = makeSut();
+    await sut.getAll();
+    expect(getTaskStoreSpy.fetchAllCount).toBe(1);
+    expect(getTaskStoreSpy.fetchItemCount).toBe(0);
+  });
 });
