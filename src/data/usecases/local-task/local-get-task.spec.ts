@@ -45,4 +45,13 @@ describe("LocalGetTask", () => {
     expect(tasks).toEqual([]);
     expect(getTaskStoreSpy.fetchAllCount).toBe(1);
   });
+
+  it("should return tasks if it exists", async () => {
+    const { getTaskStoreSpy, sut } = makeSut();
+    const mockedTasks = makeTasksList();
+    getTaskStoreSpy.allTasks = mockedTasks;
+    const tasks = await sut.getAll();
+    expect(tasks).toEqual(mockedTasks);
+    expect(getTaskStoreSpy.fetchAllCount).toBe(1);
+  });
 });
