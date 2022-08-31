@@ -15,7 +15,7 @@ const makeSut = () => {
 describe("LocalGetTask", () => {
   it("should not call getAll if get is called", async () => {
     const { getTaskStoreSpy, sut } = makeSut();
-    await sut.get("any_id");
+    await sut.get("any_id", 0);
     expect(getTaskStoreSpy.fetchItemCount).toBe(1);
     expect(getTaskStoreSpy.fetchAllCount).toBe(0);
   });

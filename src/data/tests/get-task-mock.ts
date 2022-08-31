@@ -14,5 +14,6 @@ export class GetTaskStoreSpy implements GetTaskStore {
   fetchAll() {
     this.fetchAllCount++;
     return this.allTasks;
+    return [];
   }
 }
