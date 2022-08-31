@@ -1,7 +1,7 @@
 import { TaskParams } from "@/domain/models/task-model";
 import faker from "faker";
 
-const makeTasksList = (): Array<TaskParams> => {
+export const makeTasksList = (): Array<TaskParams> => {
   return [
     {
       id: faker.random.number(),
