@@ -9,7 +9,7 @@ export class GetTaskStoreSpy implements GetTaskStore {
   fetchItem(key: string, id: number): TaskParams {
     this.fetchItemCount++;
     const items = this.fetchAll(key);
-    const currentItem = items.filter((task) => task.id == id)[0];
+    const currentItem = items.find((task) => task.id == id);
     return currentItem;
   }
 
