@@ -10,6 +10,7 @@ export const GlobaStyles = globalCss({
   body: {
     fontSize: "62.5%",
     fontFamily: "sans-serif",
-    background: "#3098e1",
+    background: "linear-gradient(#00edcb, #0091e2)",
+    height: "100vh",
   },
 });
