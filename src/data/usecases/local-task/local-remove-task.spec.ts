@@ -12,19 +12,19 @@ class LocalRemoveTask {
   }
 }
 
-describe("LocalRemoveTask", () => {
-  const makeSut = () => {
-    const getTaskStoreSpy = new GetTaskStoreSpy();
-    const localRemoveTask = new LocalRemoveTask(getTaskStoreSpy);
-    const localGetTask = new LocalGetTask(getTaskStoreSpy);
+const makeSut = () => {
+  const getTaskStoreSpy = new GetTaskStoreSpy();
+  const localRemoveTask = new LocalRemoveTask(getTaskStoreSpy);
+  const localGetTask = new LocalGetTask(getTaskStoreSpy);
 
-    return {
-      sut: localRemoveTask,
-      getTaskStoreSpy,
-      localGetTask,
-    };
+  return {
+    sut: localRemoveTask,
+    getTaskStoreSpy,
+    localGetTask,
   };
+};
 
+describe("LocalRemoveTask", () => {
   it("should clear all tasks when clearAll is called", async () => {
     const { getTaskStoreSpy, sut, localGetTask } = makeSut();
     const tasksMock = makeTasksList();
