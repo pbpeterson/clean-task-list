@@ -1,6 +1,6 @@
 import { LocalRemoveTask } from "@/data/usecases/local-task/local-remove-task";
-import { LocalStorageDoActions } from "@/infra/usecases/localstorage.save.task";
+import { LocalStorageAdapter } from "@/infra/usecases/localstorage.save.task";
 
 export const makeDeleteTask = () => {
-  return new LocalRemoveTask(new LocalStorageDoActions());
+  return new LocalRemoveTask(new LocalStorageAdapter());
 };

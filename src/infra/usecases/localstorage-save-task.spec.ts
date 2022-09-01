@@ -3,10 +3,10 @@ import { LocalAddTask } from "@/data/usecases/local-task/local-add-task";
 import { LocalGetTask } from "@/data/usecases/local-task/local-get-task";
 import { LocalRemoveTask } from "@/data/usecases/local-task/local-remove-task";
 import "jest-localstorage-mock";
-import { LocalStorageDoActions } from "./localstorage.save.task";
+import { LocalStorageAdapter } from "./localstorage.save.task";
 
 const makeSut = () => {
-  const sut = new LocalStorageDoActions();
+  const sut = new LocalStorageAdapter();
   const localSaveTask = new LocalAddTask(sut);
   const localGetTask = new LocalGetTask(sut);
   const localDeleteTask = new LocalRemoveTask(sut);
@@ -22,7 +22,7 @@ beforeEach(() => {
   localStorage.clear();
 });
 
-describe("LocalStorageDoActions", () => {
+describe("LocalStorageAdapter", () => {
   it("should add task when a task is passed", async () => {
     const { localSaveTask, localGetTask } = makeSut();
     const myTask = { id: 1, content: "Sleep" };

@@ -3,7 +3,7 @@ import { RemoveTaskStore } from "@/data/protocols/remove-task-store";
 import { SaveTaskStore } from "@/data/protocols/save-task-store";
 import { TaskParams } from "@/domain/models/task-model";
 
-export class LocalStorageDoActions
+export class LocalStorageAdapter
   implements SaveTaskStore, GetTaskStore, RemoveTaskStore
 {
   addTask({ content, id }: TaskParams) {
