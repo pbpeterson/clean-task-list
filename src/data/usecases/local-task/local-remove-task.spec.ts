@@ -1,16 +1,7 @@
-import { RemoveTaskStore } from "@/data/protocols/remove-task-store";
 import { GetTaskStoreSpy } from "@/data/tests/get-task-mock";
 import { makeTasksList } from "@/data/tests/tasks";
-import { TaskParams } from "@/domain/models/task-model";
-import { LocalGetTask } from "./local-get-task";
-
-class LocalRemoveTask {
-  constructor(private readonly remoteTaskStore: RemoveTaskStore) {}
-  async removeAll(key: string): Promise<Array<TaskParams>> {
-    const tasks = this.remoteTaskStore.clearAllTasks(key);
-    return tasks;
-  }
-}
+import { LocalGetTask } from "@/data/usecases/local-task/local-get-task";
+import { LocalRemoveTask } from "@/data/usecases/local-task/local-remove-task";
 
 const makeSut = () => {
   const getTaskStoreSpy = new GetTaskStoreSpy();
