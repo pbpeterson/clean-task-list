@@ -36,7 +36,17 @@ class LocalStorageDoActions implements SaveTaskStore, GetTaskStore {
     localStorage.setItem(key, JSON.stringify([]));
   }
 
-  clearById() {}
+  clearById(key: string, id: number) {
+    const getOldValues: Array<TaskParams> = JSON.parse(
+      localStorage.getItem("pbTaskList")
+    );
+    let newValues = [];
+    if (getOldValues === null) {
+      return;
+    }
+    newValues = getOldValues.filter((task) => task.id !== id);
+    localStorage.setItem(key, JSON.stringify(newValues));
+  }
 }
 
 const makeSut = () => {
@@ -100,5 +110,44 @@ describe("LocalStorageDoActions", () => {
     savedTasks = await localGetTask.getAll("pbTaskList");
 
     expect(savedTasks).toEqual([]);
+  });
+
+  it("should remove an item from localStorage when clearById is called passing an id", async () => {
+    const { localSaveTask, localGetTask, localDeleteTask } = makeSut();
+    const myTasks = makeTasksList();
+
+    myTasks.forEach(async (task) => {
+      await localSaveTask.save(task);
+    });
+
+    const firstItem = myTasks[0];
+
+    let savedTasks = await localGetTask.getAll("pbTaskList");
+    expect(savedTasks).toEqual(myTasks);
+
+    await localDeleteTask.removeById("pbTaskList", firstItem.id);
+
+    savedTasks = await localGetTask.getAll("pbTaskList");
+
+    expect(savedTasks).not.toContainEqual(firstItem);
+  });
+  it("should return all tasks when user try to remove an id that does not exist", async () => {
+    const { localSaveTask, localGetTask, localDeleteTask } = makeSut();
+    const myTasks = makeTasksList();
+
+    myTasks.forEach(async (task) => {
+      await localSaveTask.save(task);
+    });
+
+    const firstItem = myTasks[0];
+
+    let savedTasks = await localGetTask.getAll("pbTaskList");
+    expect(savedTasks).toEqual(myTasks);
+
+    await localDeleteTask.removeById("pbTaskList", firstItem.id + 1);
+
+    savedTasks = await localGetTask.getAll("pbTaskList");
+
+    expect(savedTasks).toEqual(myTasks);
   });
 });
