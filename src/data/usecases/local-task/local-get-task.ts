@@ -1,7 +1,8 @@
 import { GetTaskStore } from "@/data/protocols/get-task-store";
 import { TaskParams } from "@/domain/models/task-model";
+import { GetTask } from "@/domain/usecases/get-task";
 
-export class LocalGetTask {
+export class LocalGetTask implements GetTask {
   constructor(private readonly getTaskStore: GetTaskStore) {}
 
   async getAll(key: string): Promise<Array<TaskParams>> {
@@ -13,8 +14,16 @@ export class LocalGetTask {
     }
   }
 
-  async get(key: string, id: number): Promise<TaskParams> {
-    const task = this.getTaskStore.fetchItem(key, id);
-    return task;
+  async getById(key: string, id: number): Promise<TaskParams> {
+    try {
+      const task = this.getTaskStore.fetchItem(key, id);
+      if (Boolean(task)) {
+        return task;
+      } else {
+        throw new Error();
+      }
+    } catch (error) {
+      return null;
+    }
   }
 }

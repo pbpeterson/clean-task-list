@@ -54,8 +54,19 @@ describe("LocalGetTask", () => {
     getTaskStoreSpy.allTasks = mockedTasks;
     const currentTask = mockedTasks[0];
     const currentTaskId = currentTask.id;
-    const task = await sut.get("any_key", currentTaskId);
+    const task = await sut.getById("any_key", currentTaskId);
     expect(task).toEqual(currentTask);
+    expect(getTaskStoreSpy.fetchItemCount).toBe(1);
+  });
+
+  it("should return null if task does not exist", async () => {
+    const { getTaskStoreSpy, sut } = makeSut();
+    const mockedTasks = makeTasksList();
+    getTaskStoreSpy.allTasks = mockedTasks;
+    const currentTask = mockedTasks[0];
+    const currentTaskId = currentTask.id;
+    const task = await sut.getById("any_key", currentTaskId + 1);
+    expect(task).toEqual(null);
     expect(getTaskStoreSpy.fetchItemCount).toBe(1);
   });
 });

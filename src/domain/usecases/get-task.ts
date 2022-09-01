@@ -1,8 +1,8 @@
 import { TaskParams } from "@/domain/models/task-model";
 
-interface GetTask {
-  getAll: () => Promise<Array<GetTask.Params>>;
-  getById: (id: string) => Promise<GetTask.Params>;
+export interface GetTask {
+  getAll: (key: string) => Promise<Array<GetTask.Params>>;
+  getById: (key: string, id: number) => Promise<GetTask.Params>;
 }
 
 export namespace GetTask {
