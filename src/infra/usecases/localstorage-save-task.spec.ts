@@ -8,7 +8,9 @@ import { LocalRemoveTask } from "@/data/usecases/local-task/local-remove-task";
 import { TaskParams } from "@/domain/models/task-model";
 import "jest-localstorage-mock";
 
-class LocalStorageDoActions implements SaveTaskStore, GetTaskStore {
+class LocalStorageDoActions
+  implements SaveTaskStore, GetTaskStore, RemoveTaskStore
+{
   addTask({ content, id }: TaskParams) {
     const getOldValues = JSON.parse(localStorage.getItem("pbTaskList"));
     let values = [];
