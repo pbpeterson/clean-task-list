@@ -1,17 +1,7 @@
-import { SaveTaskStore } from "@/data/protocols/save-task-store";
 import { GetTaskStoreSpy } from "@/data/tests/get-task-mock";
 import { makeTasksList } from "@/data/tests/tasks";
-import { TaskParams } from "@/domain/models/task-model";
-import { SaveTask } from "@/domain/usecases/save-task";
-import { LocalGetTask } from "./local-get-task";
-
-class LocalAddTask implements SaveTask {
-  constructor(private readonly saveTaskStore: SaveTaskStore) {}
-
-  async save({ content, id }: TaskParams): Promise<void> {
-    this.saveTaskStore.addTask({ content, id });
-  }
-}
+import { LocalAddTask } from "@/data/usecases/local-task/local-add-task";
+import { LocalGetTask } from "@/data/usecases/local-task/local-get-task";
 
 const makeSut = () => {
   const getTaskStoreSpy = new GetTaskStoreSpy();
