@@ -1,8 +1,10 @@
 import { GetTaskStore } from "@/data/protocols/get-task-store";
+import { RemoveTaskStore } from "@/data/protocols/remove-task-store";
 import { SaveTaskStore } from "@/data/protocols/save-task-store";
 import { makeTasksList } from "@/data/tests/tasks";
 import { LocalAddTask } from "@/data/usecases/local-task/local-add-task";
 import { LocalGetTask } from "@/data/usecases/local-task/local-get-task";
+import { LocalRemoveTask } from "@/data/usecases/local-task/local-remove-task";
 import { TaskParams } from "@/domain/models/task-model";
 import "jest-localstorage-mock";
 
@@ -29,16 +31,24 @@ class LocalStorageDoActions implements SaveTaskStore, GetTaskStore {
     const currentItem = items.find((task) => task.id === id);
     return currentItem;
   }
+
+  clearAllTasks(key: string): void {
+    localStorage.setItem(key, JSON.stringify([]));
+  }
+
+  clearById() {}
 }
 
 const makeSut = () => {
   const sut = new LocalStorageDoActions();
   const localSaveTask = new LocalAddTask(sut);
   const localGetTask = new LocalGetTask(sut);
+  const localDeleteTask = new LocalRemoveTask(sut);
 
   return {
     localSaveTask,
     localGetTask,
+    localDeleteTask,
   };
 };
 
@@ -71,6 +81,24 @@ describe("LocalStorageDoActions", () => {
     const { localGetTask } = makeSut();
 
     const savedTasks = await localGetTask.getAll("pbTaskList");
+    expect(savedTasks).toEqual([]);
+  });
+
+  it("should remove all items from localStorage when clearAll is called", async () => {
+    const { localSaveTask, localGetTask, localDeleteTask } = makeSut();
+    const myTasks = makeTasksList();
+
+    myTasks.forEach(async (task) => {
+      await localSaveTask.save(task);
+    });
+
+    let savedTasks = await localGetTask.getAll("pbTaskList");
+    expect(savedTasks).toEqual(myTasks);
+
+    await localDeleteTask.removeAll("pbTaskList");
+
+    savedTasks = await localGetTask.getAll("pbTaskList");
+
     expect(savedTasks).toEqual([]);
   });
 });
