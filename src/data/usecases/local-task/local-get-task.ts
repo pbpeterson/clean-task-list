@@ -8,7 +8,7 @@ export class LocalGetTask implements GetTask {
   async getAll(key: string): Promise<Array<TaskParams>> {
     try {
       const tasks = this.getTaskStore.fetchAll(key);
-      return tasks;
+      return tasks ?? [];
     } catch (error) {
       return [];
     }

@@ -46,7 +46,7 @@ beforeEach(() => {
   localStorage.clear();
 });
 
-describe("LocalStoreSaveTask", () => {
+describe("LocalStorageDoActions", () => {
   it("should add task when a task is passed", async () => {
     const { localSaveTask, localGetTask } = makeSut();
     const myTask = { id: 1, content: "Sleep" };
@@ -65,5 +65,12 @@ describe("LocalStoreSaveTask", () => {
 
     const savedTasks = await localGetTask.getAll("pbTaskList");
     expect(myTasks).toEqual(savedTasks);
+  });
+
+  it("should return an empty array when there are no items", async () => {
+    const { localGetTask } = makeSut();
+
+    const savedTasks = await localGetTask.getAll("pbTaskList");
+    expect(savedTasks).toEqual([]);
   });
 });
