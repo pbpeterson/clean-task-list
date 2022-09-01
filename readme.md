@@ -16,6 +16,6 @@
 * Factory
 
 
-I hope you enjoy it :) !
+I hope you enjoy it 😁 !
 
 by: @pbpeterson
