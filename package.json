@@ -7,6 +7,7 @@
   "devDependencies": {
     "@types/faker": "5.1.0",
     "@types/node": "^18.7.14",
+    "@types/react": "^18.0.18",
     "faker": "5.1.0",
     "jest-localstorage-mock": "^2.4.22",
     "typescript": "^4.8.2"
@@ -20,6 +21,10 @@
     "ts-jest": "^28.0.8"
   },
   "scripts": {
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   }
 }
