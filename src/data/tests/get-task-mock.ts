@@ -19,9 +19,8 @@ export class GetTaskStoreSpy implements GetTaskStore, RemoveTaskStore {
     return this.allTasks;
   }
 
-  clearAllTasks(key: string): Array<TaskParams> {
+  clearAllTasks(key: string): void {
     this.allTasks = [];
-    return this.allTasks;
   }
 
   clearById(key: string, id: number): void {
