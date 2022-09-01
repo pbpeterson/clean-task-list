@@ -26,4 +26,16 @@ describe("LocalRemoveTask", () => {
     tasks = await localGetTask.getAll("any_key");
     expect(tasks).toEqual([]);
   });
+
+  it("should clear item by id when clearById is called", async () => {
+    const { getTaskStoreSpy, sut, localGetTask } = makeSut();
+    const tasksMock = makeTasksList();
+    getTaskStoreSpy.allTasks = tasksMock;
+    let allTasks = await localGetTask.getAll("any_key");
+    const firstTask = tasksMock[0];
+    expect(allTasks).toEqual(tasksMock);
+    sut.removeById("any_key", firstTask.id);
+    allTasks = await localGetTask.getAll("any_key");
+    expect(allTasks).not.toContain(firstTask);
+  });
 });

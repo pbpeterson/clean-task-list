@@ -7,4 +7,9 @@ export class LocalRemoveTask {
     const tasks = this.remoteTaskStore.clearAllTasks(key);
     return tasks;
   }
+
+  async removeById(key: string, id: number) {
+    const tasksWithoutSelectedItem = this.remoteTaskStore.clearById(key, id);
+    return tasksWithoutSelectedItem;
+  }
 }

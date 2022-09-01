@@ -23,4 +23,9 @@ export class GetTaskStoreSpy implements GetTaskStore, RemoveTaskStore {
     this.allTasks = [];
     return this.allTasks;
   }
+
+  clearById(key: string, id: number): void {
+    const filteredTasks = this.allTasks.filter((task) => task.id !== id);
+    this.allTasks = filteredTasks;
+  }
 }
