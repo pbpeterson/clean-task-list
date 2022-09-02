@@ -1,4 +1,5 @@
 import { globalCss } from "@stitches/react";
+import { createStitches } from "@stitches/react";
 
 export const GlobaStyles = globalCss({
   "*": {
@@ -14,3 +15,5 @@ export const GlobaStyles = globalCss({
     height: "100vh",
   },
 });
+
+export const { getCssText } = createStitches();
