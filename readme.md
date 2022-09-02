@@ -15,6 +15,9 @@
 * Dependency Injection
 * Factory
 
+> We have 100% test's coverage
+
+![Tests coverage image](public/tests-coverage.png)
 
 I hope you enjoy it 😁 !
 
