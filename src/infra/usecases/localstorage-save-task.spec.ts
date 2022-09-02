@@ -106,4 +106,18 @@ describe("LocalStorageAdapter", () => {
 
     expect(savedTasks).toEqual(myTasks);
   });
+  it("should return correct item when you call getById passing id", async () => {
+    const { localSaveTask, localGetTask } = makeSut();
+    const myTasks = makeTasksList();
+
+    myTasks.forEach(async (task) => {
+      await localSaveTask.save(task);
+    });
+
+    const firstItem = myTasks[0];
+
+    const foundTask = await localGetTask.getById("pbTaskList", firstItem.id);
+
+    expect(foundTask).toEqual(firstItem);
+  });
 });
