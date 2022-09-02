@@ -5,7 +5,6 @@ export default function Document() {
   return (
     <Html>
       <Head>
-        <title>Pb - TaskList</title>
         <style
           id="stitches"
           dangerouslySetInnerHTML={{ __html: getCssText() }}

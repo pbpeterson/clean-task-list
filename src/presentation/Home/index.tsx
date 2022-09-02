@@ -1,6 +1,7 @@
 import { GetTask } from "@/domain/usecases/get-task";
 import { RemoveTask } from "@/domain/usecases/remove-task";
 import { SaveTask } from "@/domain/usecases/save-task";
+import Head from "next/head";
 import { useEffect, useState } from "react";
 import * as S from "./styles";
 
@@ -48,6 +49,9 @@ const HomeTemplate = ({
 
   return (
     <S.Wrapper>
+      <Head>
+        <title>Pb - TaskList</title>
+      </Head>
       <S.WrapperTodo>
         <S.Title>Clean Task List</S.Title>
         <form onSubmit={handleSubmit}>
