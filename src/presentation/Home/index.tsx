@@ -16,7 +16,11 @@ const HomeTemplate = ({
   localGetTask,
   localSaveTask,
 }: HomeTemplateParams) => {
-  const [taskId, setTaskId] = useState(0);
+  const [taskId, setTaskId] = useState(() =>
+    Promise.resolve(
+      localGetTask.getAll("pbTaskList").then((value) => setTaskId(value.length))
+    )
+  );
   const [tasks, setTasks] = useState([]);
 
   const getItems = async () => {
