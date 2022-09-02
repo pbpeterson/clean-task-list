@@ -1,4 +1,9 @@
-import { styled } from "@stitches/react";
+import { styled, keyframes } from "@stitches/react";
+
+const animation = keyframes({
+  "0%": { translate: "0 -2rem" },
+  "100%": { translate: "0 0" },
+});
 
 export const Wrapper = styled("div", {
   margin: "2rem auto",
@@ -49,6 +54,7 @@ export const TaskWrapper = styled("div", {
   background: "#f2f2f2",
   display: "flex",
   justifyContent: "space-between",
+  animation: `${animation} .5s`,
 });
 
 export const RemoveTask = styled("div", {
