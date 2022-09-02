@@ -120,4 +120,22 @@ describe("LocalStorageAdapter", () => {
 
     expect(foundTask).toEqual(firstItem);
   });
+
+  it("should return null when you call getById passing an id that does not exist", async () => {
+    const { localSaveTask, localGetTask } = makeSut();
+    const myTasks = makeTasksList();
+
+    myTasks.forEach(async (task) => {
+      await localSaveTask.save(task);
+    });
+
+    const firstItem = myTasks[0];
+
+    const foundTask = await localGetTask.getById(
+      "pbTaskList",
+      firstItem.id + 1
+    );
+
+    expect(foundTask).toEqual(null);
+  });
 });

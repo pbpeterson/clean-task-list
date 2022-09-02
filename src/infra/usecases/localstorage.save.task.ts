@@ -38,10 +38,9 @@ export class LocalStorageAdapter
       localStorage.getItem("pbTaskList")
     );
     let newValues = [];
-    if (getOldValues === null) {
-      return;
+    if (getOldValues !== null) {
+      newValues = getOldValues.filter((task) => task.id !== id);
+      localStorage.setItem(key, JSON.stringify(newValues));
     }
-    newValues = getOldValues.filter((task) => task.id !== id);
-    localStorage.setItem(key, JSON.stringify(newValues));
   }
 }
