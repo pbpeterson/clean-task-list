@@ -1,13 +1,13 @@
-import { LocalAddTask } from "@/data/usecases/local-task/local-add-task";
-import { LocalGetTask } from "@/data/usecases/local-task/local-get-task";
-import { LocalRemoveTask } from "@/data/usecases/local-task/local-remove-task";
+import { GetTask } from "@/domain/usecases/get-task";
+import { RemoveTask } from "@/domain/usecases/remove-task";
+import { SaveTask } from "@/domain/usecases/save-task";
 import { useEffect, useState } from "react";
 import * as S from "./styles";
 
 type HomeTemplateParams = {
-  localSaveTask: LocalAddTask;
-  localDeleteTask: LocalRemoveTask;
-  localGetTask: LocalGetTask;
+  localSaveTask: SaveTask;
+  localDeleteTask: RemoveTask;
+  localGetTask: GetTask;
 };
 
 const HomeTemplate = ({
